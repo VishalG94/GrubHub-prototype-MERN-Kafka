@@ -216,8 +216,78 @@ class Orders extends Component {
         //   // total = total.toFixed();
         return (
           <div>
-            
-            <OrderItems listItem={list[row]} />
+            <div>
+        <a href='#' style={{ marginTop: '20px' }} class='list-group-item'>
+          <div class='card' draggable>
+            <div>
+              <div className='row'>
+                <div className='col-sm-5'>
+                  <label
+                    style={{
+                      marginLeft: '10px',
+                      fontSize: '17px',
+                      color: 'Black'
+                    }}
+                  >
+                    {list[row].restaurant_name}
+                    {/* {this.props.listItem.restaurant_name} */}
+                  </label>
+                </div>
+                <div className='col-sm-4'>
+                  <label
+                    style={{
+                      fontSize: '13px',
+                      color: '#585858'
+                    }}
+                  >
+                    Status: {list[row].order_status}
+                  </label>
+                </div>
+                <label style={{ fontSize: '13px', color: '#585858' }}>
+                  $ {list[row].total}
+                </label>
+                {/* <div className='col-sm-'> */}
+                <a
+                  href='/message'
+                  onClick={this.handleMessage}
+                  name={list[row].restaurant_name}
+                  id={list[row].order_id}
+                  style={{
+                    float: 'right',
+                    marginRight: '10px',
+                    fontSize: '13px'
+                    // color: 'Blue'
+                  }}
+                >
+                  Message
+                </a>
+              </div>
+              {/* <br /> */}
+              <div style={{ marginLeft: '10px' }} className='row'>
+                {itemslist(
+                  JSON.parse(list[row].orderlist),
+                  list[row].order_status
+                )}
+              </div>
+              {/* <br /> */}
+              {/* <div className='row'>
+              <div className='col-sm-6'>
+                <label style={{ fontSize: '17px', color: 'black' }}>
+                  Total
+                </label>
+              </div>
+              <div className='col-sm-3'>
+                <label style={{ fontSize: '17px', color: 'black' }}>
+                  $ {list[row].total}
+                </label>
+              </div>
+            </div> */}
+              {/* <br /> */}
+            </div>
+          </div>
+        </a>
+      </div>
+            {/* <OrderItems listItem={list[row]} /> */}
           </div>
         )
       })
