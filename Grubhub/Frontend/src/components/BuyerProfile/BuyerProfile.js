@@ -370,7 +370,7 @@ class BuyerProfile extends Component {
       }
     }
     axios
-      .post('/buyerprofile', formData, config)
+      .post(`${ROOT_URL}/buyerprofile`, formData, config)
       .then(response => {
         let data={'email':email}
         axios.post(`${ROOT_URL}/userimage`, data).then(response => {

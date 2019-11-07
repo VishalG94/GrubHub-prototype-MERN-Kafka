@@ -100,7 +100,7 @@ class OwnerDetails extends Component {
       }
     }
     axios
-      .post('/ownerimageform', formData, config)
+      .post(`${ROOT_URL}/ownerimageform`, formData, config)
       .then(response => {
         window.location.reload()
         console.log('The file is successfully uploaded')

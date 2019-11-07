@@ -414,7 +414,7 @@ class OwnerProfile extends Component {
       }
     }
     axios
-      .post('/ownerimageform', formData, config)
+      .post(`${ROOT_URL}/ownerimageform`, formData, config)
       .then(response => {
         let data = { email: email }
         window.location.reload()
