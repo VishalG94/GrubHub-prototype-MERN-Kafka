@@ -10,8 +10,6 @@ import { connect } from 'react-redux'
 import BuyerOwnerNav from '../Display/BuyerOwnerNav'
 import { Field, reduxForm } from 'redux-form'
 import OrderItems from './OrderItems'
-import Draggable from "react-draggable";
-
 // import HTML5Backend from 'react-dnd-html5-backend'
 // import { DndProvider } from 'react-dnd'
 // import flow from 'lodash/flow'
@@ -29,13 +27,6 @@ class Orders extends Component {
       todos: [],
       currentPage: 1,
       todosPerPage: 3,
-      activeDrags: 0,
-      deltaPosition: {
-          x: 0, y: 0
-      },
-      controlledPosition: {
-          x: -400, y: 200
-      },
       messageFlag: false
     }
   }
@@ -76,49 +67,6 @@ class Orders extends Component {
       [e.target.name]: e.target.value
     })
   }
-  handleDrag = (e, ui) => {
-    const { x, y } = this.state.deltaPosition;
-    this.setState({
-        deltaPosition: {
-            x: x + ui.deltaX,
-            y: y + ui.deltaY,
-        }
-    });
-};
-
-onStart = () => {
-    this.setState({ activeDrags: ++this.state.activeDrags });
-};
-
-onStop = () => {
-    this.setState({ activeDrags: --this.state.activeDrags });
-};
-
-// For controlled component
-adjustXPos = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const { x, y } = this.state.controlledPosition;
-    this.setState({ controlledPosition: { x: x - 10, y } });
-};
-
-adjustYPos = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const { controlledPosition } = this.state;
-    const { x, y } = controlledPosition;
-    this.setState({ controlledPosition: { x, y: y - 10 } });
-};
-
-onControlledDrag = (e, position) => {
-    const { x, y } = position;
-    this.setState({ controlledPosition: { x, y } });
-};
-
-onControlledDragStop = (e, position) => {
-    this.onControlledDrag(e, position);
-    this.onStop();
-};
 
   handleClick = event => {
     this.setState(
@@ -175,9 +123,6 @@ onControlledDragStop = (e, position) => {
 
   render () {
     // redirect based on successful login
-    const dragHandlers = { onStart: this.onStart, onStop: this.onStop };
-    const { deltaPosition, controlledPosition } = this.state;
-
     const { todos, currentPage, todosPerPage } = this.state
     const indexOfLastTodo = currentPage * todosPerPage
     const indexOfFirstTodo = indexOfLastTodo - todosPerPage
@@ -270,9 +215,6 @@ onControlledDragStop = (e, position) => {
         //   total = total + items[item][1] * items[item][0]
         //   // total = total.toFixed();
         return (
-          <Draggable {...dragHandlers}>
-
-
           <div>
             <div>
         <a href='#' style={{ marginTop: '20px' }} class='list-group-item'>
@@ -347,7 +289,6 @@ onControlledDragStop = (e, position) => {
       </div>
             {/* <OrderItems listItem={list[row]} /> */}
           </div>
-          </Draggable>
         )
       })
       // })
